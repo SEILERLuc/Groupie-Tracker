@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+<h1 class="neonText">GROUPIE TRACKER</h1>
+<div class="global-container">
+    <div class="topnav" id="myTopnav">
+        <div class="active">
+            <div class="home">
+                <a href="http://localhost:8000"> <input type="submit" value="HOME" class="home"></a>
+            </div>
+        </div>
+        <form action="/" method="POST" autocomplete="off">
+            <div class="active">
+                <div class="saerch-org">
+                    <input type="text" name="search" placeholder="search your artist" list="character">
+                    <datalist id="character">
+                        {{range .Artists}}
+                            <option value={{.Name}}>{{.Name}} - artist/band</option>
+                            {{range .Members}}
+                                <option value={{.}}>{{.}} - member</option>
+                            {{end}}
+                            <option value={{.CreationDate}}>{{.CreationDate}} - creation date</option>*
+                            <option value={{.FirstAlbum}}>{{.FirstAlbum}} - first album</option>
+                            {{range .Locations}}
+                                <option value={{.}}>{{.}} - location</option>
+                            {{end}}
+                        {{end}}
+                    </datalist>
+                    <input type="submit" value="Search">
+                </div>
+            </div>
+        </form>
+
+        <div class="filter">
+            <form action="/" method="POST" autocomplete="off">
+                <div class="active">
+                    <label class="filter-title" for="creationdate"><p> by creation date: </p></label>
+                    <input type="range" name="date" min="1960" max="2022" value="1960" oninput="this.nextElementSibling.value = this.value">
+                    <output>1960</output>
+                </div>
+
+                <div class="active">
+                    <p>N° Members:</p>
+                    <div class="box">
+                        <input type="checkbox" name="member" value="1">
+                        <label for="1"> 1 </label>
+                        <input type="checkbox" name="member" value="2">
+                        <label for="2"> 2 </label>
+                        <input type="checkbox" name="member" value="3">
+                        <label for="3"> 3 </label>
+                        <input type="checkbox" name="member" value="4">
+                        <label for="4"> 4 </label>
+                        <input type="checkbox" name="member" value="5">
+                        <label for="5"> 5 </label>
+                        <input type="checkbox" name="member" value="6">
+                        <label for="6"> 6 </label>
+                        <input type="checkbox" name="member" value="7">
+                        <label for="7"> 7 </label>
+                    </div>
+                </div>
+                <div class = "active">
+                    <p>First Album Year:</p>
+                    <input type="range" name="album" min="1958" max="2013" value="1958" oninput="this.nextElementSibling.value = this.value">
+                    <output>1958</output>
+                </div>
+                <div class="active">
+                    <input type="submit" value="Apply filters">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="img-reverse">
+    <table>{{range $y, $x := .Artists }}
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{{$x.Image}}" alt="Avatar" style="width:300px;height:300px;margin-bottom: 25px;position: center;">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>{{$x.Name}}</h2>
+                        <strong>MEMBERS :</strong> {{range .Members}}{{ . }} {{end}}<br>
+                        <p>Creation date : {{ $x.CreationDate }}</p>
+                        <form class="form-inline" action="/artist" method="POST">
+                            <input type="hidden" name="artist" value={{.ID}}>
+                            <input type="submit" value="More informations">
+                        </form>
+                        <h2><a href="https://open.spotify.com/search/{{.Name}}" target="_blank"> <input type="button" class="spotify" value="SPOTIFY"></a></h2>
+                    </div>
+                </div>
+            </div>
+        {{end}}
+    </table>
+</div>
+
+</body>
+</html>

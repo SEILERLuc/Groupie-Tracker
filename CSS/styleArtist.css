@@ -1,0 +1,53 @@
+h1 {
+    position: center;
+}
+
+body {
+    font-family: Apple Chancery, cursive;
+    background-image: url("https://images5.alphacoders.com/951/thumb-1920-951549.jpg");
+    background-attachment: scroll;
+}
+
+article {
+    background-image: url("https://images2.alphacoders.com/103/thumb-1920-1039991.jpg");
+    border-radius: 10px;
+    position: center;
+}
+
+.etiquette {
+    margin-left: 20%;
+    margin-right: 20%;
+    color: azure;
+    overflow: auto;
+    justify-content: space-evenly;
+    align-items: center;
+    display: block;
+}
+
+img {
+    border-radius: 10px;
+    width: 200px;
+
+}
+
+.presentation {
+    line-height: 150%;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    border: none;
+    background: none;
+    color: azure;
+    font-size: 20px;
+}
+
+input:hover {
+    color: aquamarine;
+}
+
+.relations {
+    display: flex;
+}

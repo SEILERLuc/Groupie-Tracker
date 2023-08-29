@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Groupie-tracker</title>
+    <link rel="stylesheet" href="../CSS/styleArtist.css">
+</head>
+
+<body>
+<!-- ajouter le bouton de retour à l'accueil-->
+<a href="http://localhost:8000"> <input type="button" value="Home"></a>
+{{range .Artists}}
+    <div class="etiquette">
+        <article>
+            <div class="image">
+                <img class="img" src="{{ .Image }}" title="{{.Name}}" alt="{{.Name}}"></td>
+            </div>
+            <div class="presentation">
+                <h2><a href="https://open.spotify.com/search/{{.Name}}" target="_blank"><img src="/images/logo-spotify.png" alt="google" style="width: 50px"><input type="button" value=""></a>{{.Name}}</h2>
+                <strong>Creation Date:</strong> {{ .CreationDate }}<br>
+                <strong>First album:</strong> {{.FirstAlbum}}<br>
+                <strong>Members:</strong> {{range .Members}}<li>{{ . }}</li> {{end}}
+                <!-- <strong>Concerts Date:</strong> {{range .ConcertDates}}{{ . }} {{end}}<br>
+                <strong>Locations:</strong>{{range .Locations}}<li>{{.}}</li> {{end}} -->
+                <strong>Relations:</strong>
+                    {{range $key, $value := .Relations}}
+                            <li class="relations"><a href="https://www.google.com/maps/search/?api=1&query={{$key}}" target="_blank"><img src="/images/google-map.png" alt="google" style="width: 50px"><input type="button" value=""></a>{{$key}}: {{ $value }}</li>
+                    {{end}}<br>
+                <strong>HISTORY:</strong><a href="https://fr.wikipedia.org/wiki/{{.Name}}" target="_blank"> <input type="button" value="{{.Name}}"></a><br>
+            </div>
+        </article>
+    </div><br><br>
+{{end}}
+</body>
+
+</html>
